@@ -128,7 +128,7 @@
             return this.IsTyping;
         }
 
-        private void Cleanup()
+        public void Cleanup()
         {
             if (this.typeTextCoroutine != null)
             {
