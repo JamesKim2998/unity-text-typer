@@ -134,6 +134,7 @@
             {
                 this.StopCoroutine(this.typeTextCoroutine);
                 this.typeTextCoroutine = null;
+                this.textComponent.text = "";
             }
         }
 
