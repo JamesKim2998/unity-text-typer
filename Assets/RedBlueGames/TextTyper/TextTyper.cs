@@ -35,7 +35,9 @@
         [Tooltip("Event called when a character is printed. Inteded for audio callbacks.")]
         private CharacterPrintedEvent characterPrinted = new CharacterPrintedEvent();
 
+        [SerializeField]
         private Text textComponent;
+
         private string printingText;
         private float defaultPrintDelay;
         private Coroutine typeTextCoroutine;
@@ -76,19 +78,6 @@
             }
         }
 
-        private Text TextComponent
-        {
-            get
-            {
-                if (this.textComponent == null)
-                {
-                    this.textComponent = this.GetComponent<Text>();
-                }
-
-                return this.textComponent;
-            }
-        }
-
         /// <summary>
         /// Types the text into the Text component character by character, using the specified (optional) print delay per character.
         /// </summary>
@@ -113,7 +102,7 @@
 
             var generator = new TypedTextGenerator();
             var typedText = generator.GetCompletedText(this.printingText);
-            this.TextComponent.text = typedText.TextToPrint;
+            this.textComponent.text = typedText.TextToPrint;
 
             this.OnTypewritingComplete();
         }
@@ -134,13 +123,14 @@
             {
                 this.StopCoroutine(this.typeTextCoroutine);
                 this.typeTextCoroutine = null;
-                this.textComponent.text = "";
             }
+
+            this.textComponent.text = string.Empty;
         }
 
         private IEnumerator TypeTextCharByChar(string text)
         {
-            this.TextComponent.text = string.Empty;
+            this.textComponent.text = string.Empty;
 
             var generator = new TypedTextGenerator();
             TypedTextGenerator.TypedText typedText;
@@ -148,7 +138,7 @@
             do
             {
                 typedText = generator.GetTypedTextAt(text, printedCharCount);
-                this.TextComponent.text = typedText.TextToPrint;
+                this.textComponent.text = typedText.TextToPrint;
                 this.OnCharacterPrinted(typedText.LastPrintedChar.ToString());
 
                 ++printedCharCount;
