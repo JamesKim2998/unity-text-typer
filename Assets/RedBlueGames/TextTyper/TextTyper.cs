@@ -15,7 +15,7 @@
         /// <summary>
         /// The print delay setting. Could make this an option some day, for fast readers.
         /// </summary>
-        private const float PrintDelaySetting = 0.018f;
+        private const float PrintDelaySetting = 0.01f;
 
         // Characters that are considered punctuation in this language. TextTyper pauses on these characters
         // a bit longer by default. Could be a setting sometime since this doesn't localize.
